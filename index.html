@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade | Onde marketing vira operação</title>
+<meta name="description" content="A comunidade de quem constrói marketing de verdade. Network, calls ao vivo e troca direta com quem opera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0B;
+    --bg2:#121214;
+    --card:#141416;
+    --card-hi:#1A1A1D;
+    --ink:#FFFFFF;
+    --muted:#8B8B90;
+    --faint:#5A5A5F;
+    --line:#222225;
+    --line-hi:#33333A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Hanken Grotesk',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;
+  }
+  .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+
+  .pill{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--bg2);border:1px solid var(--line);
+    border-radius:999px;padding:5px;font-size:13px;
+  }
+  .pill .tag{background:var(--ink);color:var(--bg);border-radius:999px;padding:4px 12px;font-weight:600;font-size:12px}
+  .pill .txt{color:var(--muted);padding-right:12px}
+
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;border-bottom:1px solid var(--line)}
+  .logo{font-weight:700;font-size:22px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+  .logo .dot{width:22px;height:22px;border-radius:6px;background:var(--ink);display:inline-block}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14.5px;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{background:var(--ink);color:var(--bg);text-decoration:none;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:7px;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
+
+  .hero{text-align:center;padding:70px 0 60px}
+  .club-name{font-weight:700;font-size:17px;letter-spacing:.02em;margin-bottom:28px;color:var(--ink)}
+  .hero .pill{margin-bottom:34px}
+  h1{
+    font-weight:400;font-size:clamp(44px,8vw,104px);line-height:.98;letter-spacing:-.04em;
+    background:linear-gradient(180deg,#fff 30%,#7a7a80 130%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:28px;
+  }
+  .hero .sub{max-width:540px;margin:0 auto 40px;color:var(--muted);font-size:clamp(15px,2vw,18px);font-weight:300}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:14px 24px;border-radius:999px;cursor:pointer;border:none;transition:opacity .2s, transform .12s, border-color .2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-solid{background:var(--ink);color:var(--bg)}
+  .btn-ghost{background:transparent;border:1px solid var(--line-hi);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink)}
+
+  .sec-head{text-align:center;margin-bottom:50px}
+  .sec-head .pill{margin-bottom:24px}
+  .sec-head h2{
+    font-weight:400;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacing:-.03em;
+    background:linear-gradient(180deg,#fff 40%,#85858a 120%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+
+  .toggle-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:46px;flex-wrap:wrap}
+  .toggle{display:inline-flex;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:5px;gap:4px}
+  .toggle button{border:none;background:transparent;color:var(--muted);cursor:pointer;font-weight:600;font-size:14px;padding:9px 22px;border-radius:999px;transition:all .2s;font-family:inherit}
+  .toggle button.active{background:var(--ink);color:var(--bg)}
+  .save-badge{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:30px;align-items:stretch}
+  .plan{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px 28px;display:flex;flex-direction:column;transition:transform .2s, border-color .2s}
+  .plan:hover{transform:translateY(-4px);border-color:var(--line-hi)}
+  .plan.featured{background:var(--card-hi);border-color:#3a3a42;box-shadow:0 30px 70px -30px rgba(255,255,255,.12)}
+  .pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .plan-platform{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+  .plan-name{font-weight:600;font-size:24px;letter-spacing:-.02em;margin-bottom:18px}
+  .price{display:flex;align-items:baseline;gap:5px;margin-bottom:4px;flex-wrap:wrap}
+  .price .cur{font-size:18px;color:var(--muted);font-weight:500}
+  .price .val{font-weight:600;font-size:46px;letter-spacing:-.03em;line-height:1}
+  .price .per{font-size:14px;color:var(--faint)}
+  .price-sub{font-size:13.5px;color:var(--faint);min-height:20px;margin-bottom:24px}
+  .price-sub .strike{text-decoration:line-through;opacity:.55;margin-right:6px}
+
+  .feat{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:28px;flex:1}
+  .feat li{display:flex;gap:11px;font-size:14.5px;color:var(--ink);line-height:1.4;font-weight:300}
+  .feat li .ic{flex:none;width:18px;height:18px;border-radius:50%;border:1px solid var(--line-hi);color:var(--ink);display:grid;place-items:center;font-size:10px;margin-top:2px}
+  .feat li.off{color:var(--faint)}
+  .feat li.off .ic{border-color:var(--line);color:var(--faint)}
+
+  .cta{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:15px;border-radius:12px;cursor:pointer;border:none;width:100%;transition:transform .12s, opacity .2s, border-color .2s;font-family:inherit}
+  .cta:hover{transform:translateY(-1px)}
+  .cta.ghost{background:transparent;border:1px solid var(--line-hi);color:var(--ink)}
+  .cta.ghost:hover{border-color:var(--ink)}
+  .cta.solid{background:var(--ink);color:var(--bg)}
+  .cta.solid:hover{opacity:.85}
+  .cta.disabled{background:transparent;border:1px solid var(--line);color:var(--faint);cursor:not-allowed}
+  .cta.disabled:hover{transform:none}
+  .plan.soon{opacity:.62}
+  .plan.soon:hover{transform:none;border-color:var(--line)}
+  .plan.soon.featured{box-shadow:none;border-color:var(--line)}
+  .pop.soft{background:var(--bg2);color:var(--muted);border:1px solid var(--line)}
+  .soon-price{font-size:30px !important;color:var(--muted) !important}
+
+  /* ===== GATE / APLICAÇÃO ===== */
+  body.locked{overflow:hidden}
+  .gate{
+    position:fixed;inset:0;z-index:1000;
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    padding:28px;overflow-y:auto;
+  }
+  .gate.hidden{display:none}
+  .gate-inner{width:100%;max-width:460px;margin:auto}
+
+  .gate .club-name{text-align:center;margin-bottom:18px}
+  .gate .pill{display:flex;width:fit-content;margin:0 auto 24px}
+  .gate h2{
+    text-align:center;font-weight:400;font-size:clamp(28px,5vw,40px);
+    line-height:1.05;letter-spacing:-.03em;margin-bottom:12px;
+    background:linear-gradient(180deg,#fff 40%,#85858a 120%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .gate .gate-sub{text-align:center;color:var(--muted);font-size:15px;font-weight:300;margin-bottom:30px}
+
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px;font-weight:500}
+  .field input, .field textarea, .field select{
+    width:100%;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:13px 16px;color:var(--ink);font-size:15px;
+    font-family:inherit;outline:none;transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{
+    border-color:#4a4a52;box-shadow:0 0 0 3px rgba(255,255,255,.05);
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#55555a}
+  .field textarea{resize:vertical;min-height:90px}
+  .field select{appearance:none;cursor:pointer}
+
+  .gate-submit{
+    width:100%;background:var(--ink);color:var(--bg);border:none;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:15px;padding:15px;border-radius:12px;
+    margin-top:8px;transition:opacity .2s, transform .12s;
+  }
+  .gate-submit:hover{transform:translateY(-1px)}
+  .gate-submit:disabled{opacity:.5;cursor:default;transform:none}
+  .gate-err{color:#e0625a;font-size:13px;margin-top:10px;text-align:center;min-height:18px}
+
+  /* animação de avaliação */
+  .gate-eval{text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .ring{
+    width:64px;height:64px;border-radius:50%;
+    border:3px solid var(--line);border-top-color:var(--ink);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .eval-text{font-weight:400;font-size:22px;letter-spacing:-.01em;min-height:30px}
+  .eval-step{color:var(--muted);font-size:14px;font-weight:300}
+
+  /* aprovação */
+  .gate-approved{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px}
+  .check-badge{
+    width:72px;height:72px;border-radius:50%;background:var(--ink);
+    display:grid;place-items:center;color:var(--bg);font-size:34px;
+    animation:pop .4s cubic-bezier(.2,1.4,.4,1);
+  }
+  @keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+  .gate-approved h2{margin-bottom:4px}
+  .gate-approved p{color:var(--muted);font-size:15px;font-weight:300;max-width:340px}
+  .reveal-btn{
+    background:var(--ink);color:var(--bg);border:none;cursor:pointer;
+    font-family:inherit;font-weight:600;font-size:15px;padding:14px 28px;border-radius:999px;
+    margin-top:6px;transition:transform .12s, opacity .2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .reveal-btn:hover{transform:translateY(-1px)}
+
+  .fade-step{animation:fadeIn .3s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .features{padding:80px 0;border-top:1px solid var(--line);margin-top:40px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding:46px 0;border-bottom:1px solid var(--line)}
+  .frow:last-child{border-bottom:none}
+  .frow .num{font-size:14px;color:var(--faint);margin-bottom:16px;font-weight:500}
+  .frow h3{font-weight:400;font-size:clamp(22px,3vw,30px);line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+  .frow p{color:var(--muted);font-size:15px;font-weight:300;max-width:420px}
+  .frow .visual{background:var(--card);border:1px solid var(--line);border-radius:18px;height:200px;display:grid;place-items:center;color:var(--faint);font-size:13px}
+  .frow.rev .visual{order:-1}
+
+  .faq{padding:70px 0;border-top:1px solid var(--line)}
+  .faq .sec-head{margin-bottom:36px}
+  .qa{border-top:1px solid var(--line);padding:24px 4px;cursor:pointer}
+  .qa:last-child{border-bottom:1px solid var(--line)}
+  .qa .q{display:flex;justify-content:space-between;align-items:center;font-weight:500;font-size:17px;gap:16px}
+  .qa .q .plus{color:var(--ink);font-size:22px;flex:none;transition:transform .2s;font-weight:300}
+  .qa.open .q .plus{transform:rotate(45deg)}
+  .qa .a{max-height:0;overflow:hidden;color:var(--muted);font-size:15px;font-weight:300;transition:max-height .25s ease, padding .25s ease}
+  .qa.open .a{max-height:220px;padding-top:14px}
+
+  footer{text-align:center;padding:44px 28px;color:var(--faint);font-size:13px;border-top:1px solid var(--line);font-weight:300}
+
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .plans{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+    .plan.featured{order:-1}
+    .frow{grid-template-columns:1fr;gap:24px}
+    .frow.rev .visual{order:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="locked">
+
+<!-- ===== GATE DE APLICAÇÃO ===== -->
+<div class="gate" id="gate">
+  <div class="gate-inner">
+
+    <!-- ESTÁGIO 1: FORMULÁRIO -->
+    <div id="stageForm">
+      <div class="club-name">Antigravidade Club</div>
+      <span class="pill"><span class="tag">Aplicação</span><span class="txt">Vagas com seleção</span></span>
+      <h2>Antes de entrar,<br>me conta de você</h2>
+      <p class="gate-sub">O Antigravidade não é grupo aberto. A gente avalia cada aplicação pra manter a sala cheia de gente boa.</p>
+
+      <form id="applyForm" novalidate>
+        <div class="field">
+          <label>Nome completo</label>
+          <input type="text" id="f_nome" placeholder="Seu nome" required>
+        </div>
+        <div class="field">
+          <label>WhatsApp (com DDD)</label>
+          <input type="tel" id="f_numero" placeholder="(00) 00000-0000" required>
+        </div>
+        <div class="field">
+          <label>Sua área de atuação</label>
+          <input type="text" id="f_area" placeholder="Ex: marketing, vendas, ou empreendedor(a)" required>
+        </div>
+        <div class="field">
+          <label>Há quanto tempo você atua nisso?</label>
+          <select id="f_tempo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option>Menos de 1 ano</option>
+            <option>1 a 3 anos</option>
+            <option>3 a 5 anos</option>
+            <option>5 a 10 anos</option>
+            <option>Mais de 10 anos</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Conta uma coisa que você fez que mudou algo numa empresa</label>
+          <textarea id="f_historia" placeholder="Pode ser um resultado, uma virada, um projeto que deu certo..." required></textarea>
+        </div>
+        <button type="submit" class="gate-submit" id="applyBtn">Enviar aplicação</button>
+        <div class="gate-err" id="applyErr"></div>
+      </form>
+    </div>
+
+    <!-- ESTÁGIO 2: AVALIAÇÃO -->
+    <div id="stageEval" class="gate-eval" style="display:none">
+      <div class="ring"></div>
+      <div class="eval-text" id="evalText">Avaliando sua aplicação</div>
+      <div class="eval-step" id="evalStep">Lendo suas respostas...</div>
+    </div>
+
+    <!-- ESTÁGIO 3: APROVAÇÃO -->
+    <div id="stageApproved" class="gate-approved" style="display:none">
+      <div class="check-badge">✓</div>
+      <h2>Você foi aprovado</h2>
+      <p>Bem-vindo ao Antigravidade Club. Dá uma olhada nos planos e escolha por onde quer começar.</p>
+      <button class="reveal-btn" id="revealBtn">Ver os planos ↗</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="club-name">Antigravidade Club</div>
+    <span class="pill"><span class="tag">Comunidade</span><span class="txt">Bora crescer?</span></span>
+    <h1>Onde marketing<br>vira operação</h1>
+    <p class="sub">Pare de aprender marketing solto em curso de coach e guru. Entre numa comunidade de quem constrói de verdade, com network, troca direta e gente que opera no jogo, não só assiste.</p>
+    <div class="hero-ctas">
+      <a href="#planos" class="btn btn-solid">Ver os planos ↗</a>
+      <a href="#beneficios" class="btn btn-ghost">Como funciona</a>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="planos">
+  <div class="sec-head">
+    <span class="pill"><span class="tag">Planos</span><span class="txt">Escolha o seu</span></span>
+    <h2>Dois mundos,<br>um objetivo: crescer</h2>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-platform">WhatsApp</div>
+      <div class="plan-name">Network</div>
+      <div class="price"><span class="cur">R$</span><span class="val" id="waVal">97</span><span class="per" id="waPer">/ano</span></div>
+      <div class="price-sub" id="waSub">Menos de R$9 por mês</div>
+      <ul class="feat">
+        <li><span class="ic">✓</span> Grupo de network no WhatsApp</li>
+        <li><span class="ic">✓</span> Tira-dúvidas com a comunidade</li>
+        <li><span class="ic">✓</span> Troca entre pessoas no mesmo caminho</li>
+        <li class="off"><span class="ic"></span> Sem calls ao vivo</li>
+        <li class="off"><span class="ic"></span> Sem materiais exclusivos</li>
+      </ul>
+      <a class="cta solid" href="#" data-plan="whatsapp">Entrar no Network ↗</a>
+    </div>
+
+    <div class="plan featured soon">
+      <div class="pop">Em breve</div>
+      <div class="plan-platform">Discord</div>
+      <div class="plan-name">Imersão</div>
+      <div class="price"><span class="val soon-price">Em breve</span></div>
+      <div class="price-sub" id="dcSub">Abre logo logo</div>
+      <ul class="feat">
+        <li><span class="ic">✓</span> 2 calls ao vivo por semana, seg e qui às 20h</li>
+        <li><span class="ic">✓</span> Sala de networking ativa</li>
+        <li><span class="ic">✓</span> Troca direta comigo e com especialistas</li>
+        <li><span class="ic">✓</span> Materiais e bastidores exclusivos</li>
+        <li><span class="ic">✓</span> Canais organizados por tema</li>
+      </ul>
+      <span class="cta disabled">Em breve</span>
+    </div>
+
+    <div class="plan soon">
+      <div class="pop soft">Em breve</div>
+      <div class="plan-platform">Os dois</div>
+      <div class="plan-name">Completo</div>
+      <div class="price"><span class="val soon-price">Em breve</span></div>
+      <div class="price-sub" id="cbSub">Abre logo logo</div>
+      <ul class="feat">
+        <li><span class="ic">✓</span> Tudo da Imersão no Discord</li>
+        <li><span class="ic">✓</span> Mais o Network no WhatsApp</li>
+        <li><span class="ic">✓</span> Acesso aos dois mundos por um ano</li>
+        <li><span class="ic">✓</span> O melhor custo-benefício</li>
+      </ul>
+      <span class="cta disabled">Em breve</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="beneficios">
+  <div class="features">
+    <div class="sec-head">
+      <span class="pill"><span class="tag">Benefícios</span><span class="txt">O que você ganha</span></span>
+      <h2>Não é mais um<br>grupo qualquer</h2>
+    </div>
+
+    <div class="frow">
+      <div>
+        <div class="num">01</div>
+        <h3>Calls ao vivo, comigo presente de verdade</h3>
+        <p>Duas vezes por semana, ao vivo. Não é aula gravada que envelhece. É troca em tempo real, com as suas perguntas e o seu contexto.</p>
+      </div>
+      <div class="visual">Calls · seg e qui · 20h</div>
+    </div>
+
+    <div class="frow rev">
+      <div>
+        <div class="num">02</div>
+        <h3>Fundo de funil, não conteúdo raso</h3>
+        <p>Aqui não tem "5 dicas pra bombar". Tem o que o mercado não entrega de graça: método, bastidor e a operação real por trás do marketing que funciona.</p>
+      </div>
+      <div class="visual">Profundidade de operação</div>
+    </div>
+
+    <div class="frow">
+      <div>
+        <div class="num">03</div>
+        <h3>Uma rede de gente que opera no jogo</h3>
+        <p>Networking com pessoas no mesmo caminho e com especialistas do mercado. O valor de uma comunidade não é o conteúdo. É quem está dentro dela.</p>
+      </div>
+      <div class="visual">Network + especialistas</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="faq">
+  <div class="faq">
+    <div class="sec-head">
+      <span class="pill"><span class="tag">Dúvidas</span><span class="txt">Perguntas rápidas</span></span>
+      <h2>O que costumam<br>perguntar</h2>
+    </div>
+
+    <div class="qa" onclick="this.classList.toggle('open')">
+      <div class="q"><span>Qual a diferença entre o WhatsApp e o Discord?</span><span class="plus">+</span></div>
+      <div class="a">O WhatsApp (Network) é a porta de entrada: um grupo pra trocar e tirar dúvida com pessoas no mesmo caminho. O Discord (Imersão) é onde eu estou presente, com 2 calls ao vivo por semana, materiais exclusivos e troca direta comigo e com especialistas.</div>
+    </div>
+    <div class="qa" onclick="this.classList.toggle('open')">
+      <div class="q"><span>Como funciona o desconto anual?</span><span class="plus">+</span></div>
+      <div class="a">No plano anual da Imersão você paga 40% menos do que pagaria mês a mês. O WhatsApp já é anual. E o Completo junta os dois mundos por um ano, mais barato que assinar separado.</div>
+    </div>
+    <div class="qa" onclick="this.classList.toggle('open')">
+      <div class="q"><span>Posso cancelar quando quiser?</span><span class="plus">+</span></div>
+      <div class="a">Sim. No plano mensal da Imersão, você cancela quando quiser e mantém o acesso até o fim do período pago. Nos planos anuais, o acesso vale pelos 12 meses contratados.</div>
+    </div>
+    <div class="qa" onclick="this.classList.toggle('open')">
+      <div class="q"><span>Pra quem é essa comunidade?</span><span class="plus">+</span></div>
+      <div class="a">Pra profissional de marketing que quer subir de nível e pra dono de empresa que toca o próprio marketing e cansou de aprender só metade do jogo. Se você quer profundidade de operação, é aqui.</div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Comunidade · Marketing de verdade, de dentro da operação</footer>
+
+<script>
+  // ===== GATE DE APLICAÇÃO =====
+  // Endpoint do Formspree onde as aplicações caem. Troque pelo seu.
+  const FORMSPREE_APPLY = "https://formspree.io/f/SEU_ID_AQUI";
+
+  const applyForm = document.getElementById('applyForm');
+  const applyBtn = document.getElementById('applyBtn');
+  const applyErr = document.getElementById('applyErr');
+  const stageForm = document.getElementById('stageForm');
+  const stageEval = document.getElementById('stageEval');
+  const stageApproved = document.getElementById('stageApproved');
+  const evalStep = document.getElementById('evalStep');
+
+  applyForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    applyErr.textContent = '';
+
+    const dados = {
+      nome: document.getElementById('f_nome').value.trim(),
+      numero: document.getElementById('f_numero').value.trim(),
+      area: document.getElementById('f_area').value.trim(),
+      tempo: document.getElementById('f_tempo').value,
+      historia: document.getElementById('f_historia').value.trim(),
+      _subject: 'Nova aplicação — Antigravidade Club'
+    };
+
+    if(!dados.nome || !dados.numero || !dados.area || !dados.tempo || !dados.historia){
+      applyErr.textContent = 'Preenche tudo pra continuar.';
+      return;
+    }
+
+    applyBtn.disabled = true;
+    applyBtn.textContent = 'Enviando...';
+
+    // Envia pro Formspree (não bloqueia a animação se falhar)
+    try{
+      if(FORMSPREE_APPLY.startsWith('http') && !FORMSPREE_APPLY.includes('SEU_ID')){
+        await fetch(FORMSPREE_APPLY, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify(dados)
+        });
+      }
+    }catch(err){ /* segue mesmo se falhar o envio */ }
+
+    // Vai pra animação de avaliação
+    stageForm.style.display = 'none';
+    stageEval.style.display = 'flex';
+    stageEval.classList.add('fade-step');
+    rodarAvaliacao();
+  });
+
+  function rodarAvaliacao(){
+    const passos = [
+      'Lendo suas respostas...',
+      'Conferindo seu perfil...',
+      'Avaliando sua experiência...',
+      'Quase lá...'
+    ];
+    let i = 0;
+    evalStep.textContent = passos[0];
+    const intv = setInterval(()=>{
+      i++;
+      if(i < passos.length){
+        evalStep.textContent = passos[i];
+      } else {
+        clearInterval(intv);
+        // mostra aprovação
+        stageEval.style.display = 'none';
+        stageApproved.style.display = 'flex';
+        stageApproved.classList.add('fade-step');
+      }
+    }, 1100);
+  }
+
+  document.getElementById('revealBtn').addEventListener('click', function(){
+    document.getElementById('gate').classList.add('hidden');
+    document.body.classList.remove('locked');
+  });
+</script>
+
+<script>
+  // Troque a URL abaixo pelo seu Payment Link real do Stripe.
+  const STRIPE_WHATSAPP_LINK = "https://buy.stripe.com/6oUcN79k3gie3D6f3x8bS00";
+
+  document.querySelector('[data-plan="whatsapp"]').addEventListener('click', function(e){
+    e.preventDefault();
+    if(STRIPE_WHATSAPP_LINK.startsWith('http')){
+      window.location.href = STRIPE_WHATSAPP_LINK;
+    } else {
+      alert('Configure o link do Stripe no código (STRIPE_WHATSAPP_LINK).');
+    }
+  });
+</script>
+</body>
+</html>
