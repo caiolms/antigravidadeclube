@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antigravidade Club</title>
+<meta name="description" content="A comunidade de quem constrói no digital de verdade. Sem coach, sem guru, sem hype. Só quem opera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0B; --bg2:#121214; --card:#141416; --card-hi:#1A1A1D;
+    --ink:#FFFFFF; --muted:#8B8B90; --faint:#5A5A5F; --line:#222225; --line-hi:#33333A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  .pill{display:inline-flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:5px;font-size:13px}
+  .pill .tag{background:var(--ink);color:var(--bg);border-radius:999px;padding:4px 12px;font-weight:600;font-size:12px}
+  .pill .txt{color:var(--muted);padding-right:12px}
+
+  /* hero */
+  .hero{text-align:center;padding:80px 0 56px}
+  .hero .club-name{font-weight:700;font-size:19px;letter-spacing:.02em;margin-bottom:28px}
+  .hero .pill{margin-bottom:34px}
+  h1{
+    font-weight:400;font-size:clamp(44px,8vw,96px);line-height:.98;letter-spacing:-.04em;
+    background:linear-gradient(180deg,#fff 34%,#7a7a80 130%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:28px;
+  }
+  .hero .sub{max-width:580px;margin:0 auto 40px;color:var(--muted);font-size:clamp(15px,2vw,18px);font-weight:300}
+  .hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px;padding:15px 30px;border-radius:999px;transition:transform .12s,opacity .2s}
+  .hero-cta:hover{transform:translateY(-1px)}
+
+  .sec-head{text-align:center;margin-bottom:48px}
+  .sec-head .pill{margin-bottom:22px}
+  .sec-head h2{font-weight:400;font-size:clamp(28px,5vw,52px);line-height:1.05;letter-spacing:-.03em;background:linear-gradient(180deg,#fff 40%,#85858a 120%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+  /* manifesto — o que é */
+  .manifesto{padding:72px 0;border-top:1px solid var(--line)}
+  .mrow{display:grid;grid-template-columns:80px 1fr;gap:28px;padding:34px 0;border-bottom:1px solid var(--line);align-items:start}
+  .mrow:last-child{border-bottom:none}
+  .mrow .num{font-size:30px;font-weight:300;color:var(--faint);letter-spacing:-.02em}
+  .mrow h3{font-weight:500;font-size:clamp(19px,2.5vw,24px);letter-spacing:-.01em;margin-bottom:10px}
+  .mrow p{color:var(--muted);font-size:15px;font-weight:300;max-width:580px}
+
+  /* planos */
+  .plans{padding:74px 0;border-top:1px solid var(--line)}
+  .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:820px;margin:0 auto}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 30px;display:flex;flex-direction:column;position:relative}
+  .plan.hi{border-color:var(--line-hi);background:var(--card-hi)}
+  .plan .badge{position:absolute;top:22px;right:22px;font-size:11px;font-weight:600;color:var(--bg);background:var(--ink);padding:4px 11px;border-radius:999px}
+  .plan .kind{font-size:14px;color:var(--muted);font-weight:500;margin-bottom:6px}
+  .plan .pname{font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:20px}
+  .plan .price{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+  .plan .price .val{font-size:44px;font-weight:600;letter-spacing:-.03em}
+  .plan .price .per{font-size:15px;color:var(--muted);font-weight:400}
+  .plan .price-note{font-size:13px;color:var(--faint);margin-bottom:26px;font-weight:300}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:30px;flex:1}
+  .plan li{display:flex;gap:11px;font-size:14.5px;color:var(--ink);font-weight:300;line-height:1.45}
+  .plan li .mk{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:10px;margin-top:2px;border:1px solid var(--line-hi);color:var(--muted)}
+  .plan .btn{display:block;text-align:center;text-decoration:none;font-weight:600;font-size:15px;padding:15px;border-radius:12px;transition:transform .12s,opacity .2s}
+  .plan .btn.solid{background:var(--ink);color:var(--bg)}
+  .plan .btn.solid:hover{transform:translateY(-1px)}
+  .plan .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-hi)}
+  .plan .btn.ghost:hover{background:var(--card-hi);transform:translateY(-1px)}
+
+  footer{text-align:center;padding:48px 28px;color:var(--faint);font-size:13px;border-top:1px solid var(--line);font-weight:300}
+
+  @media (max-width:760px){
+    .mrow{grid-template-columns:1fr;gap:8px}
+    .mrow .num{font-size:22px}
+    .plans-grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="club-name">Antigravidade Club</div>
+    <span class="pill"><span class="tag">Comunidade</span><span class="txt">Pra quem opera de verdade</span></span>
+    <h1>Growth &amp; marketing<br>para quem constrói<br>de verdade</h1>
+    <p class="sub">A comunidade de quem faz acontecer no mercado, não de quem vende curso ensinando a vender curso. Sem coach, sem guru, sem hype. Só troca real, com gente do mesmo nível.</p>
+    <a href="#planos" class="hero-cta">Ver planos ↓</a>
+  </section>
+</div>
+
+<!-- O QUE É -->
+<div class="wrap">
+  <div class="manifesto">
+    <div class="sec-head">
+      <span class="pill"><span class="tag">O que é</span><span class="txt">A régua é alta de propósito</span></span>
+      <h2>Não é mais um<br>grupo qualquer</h2>
+    </div>
+
+    <div class="mrow">
+      <div class="num">01</div>
+      <div>
+        <h3>Gente que opera, não que só fala</h3>
+        <p>Aqui é troca de quem constrói de verdade, com base na prática e no número. A gente acredita que o digital tá indo de mal a pior, lotado de promessa vazia. Esse é o oposto disso.</p>
+      </div>
+    </div>
+
+    <div class="mrow">
+      <div class="num">02</div>
+      <div>
+        <h3>Network que vale</h3>
+        <p>Conexão com gente do mesmo nível, trocando o que funciona na prática. Não é vitrine pra ninguém se promover. É onde você encontra quem tá no mesmo jogo que você.</p>
+      </div>
+    </div>
+
+    <div class="mrow">
+      <div class="num">03</div>
+      <div>
+        <h3>Presença de verdade</h3>
+        <p>No Discord, toda terça tem live, e eu entro no dia a dia pra trocar ideia, responder e debater. Não é comunidade que o dono aparece uma vez por mês. É onde eu estou.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANOS -->
+<div class="wrap" id="planos">
+  <div class="plans">
+    <div class="sec-head">
+      <span class="pill"><span class="tag">Planos</span><span class="txt">Escolhe como quer entrar</span></span>
+      <h2>Dois jeitos<br>de fazer parte</h2>
+    </div>
+
+    <div class="plans-grid">
+
+      <!-- WHATSAPP -->
+      <div class="plan">
+        <div class="kind">Network</div>
+        <div class="pname">WhatsApp</div>
+        <div class="price">
+          <span class="val">R$27</span>
+          <span class="per">uma vez</span>
+        </div>
+        <div class="price-note">Pagamento único. Acesso vitalício.</div>
+        <ul>
+          <li><span class="mk">✓</span> Acesso vitalício ao grupo, paga uma vez só</li>
+          <li><span class="mk">✓</span> Network diário com gente que constrói</li>
+          <li><span class="mk">✓</span> Troca de conteúdo, ferramenta e experiência real</li>
+          <li><span class="mk">✓</span> A porta de entrada da comunidade</li>
+        </ul>
+        <a href="https://pay.cakto.com.br/m7nonrj_967630" class="btn ghost">Entrar no WhatsApp</a>
+      </div>
+
+      <!-- DISCORD -->
+      <div class="plan hi">
+        <div class="badge">Completo</div>
+        <div class="kind">Imersão</div>
+        <div class="pname">Discord</div>
+        <div class="price">
+          <span class="val">R$59,90</span>
+          <span class="per">/mês</span>
+        </div>
+        <div class="price-note">Assinatura mensal. Cancela quando quiser.</div>
+        <ul>
+          <li><span class="mk">✓</span> Live comigo toda terça-feira</li>
+          <li><span class="mk">✓</span> Eu no dia a dia, trocando ideia e respondendo</li>
+          <li><span class="mk">✓</span> Canais organizados por tema, conversa que não se perde</li>
+          <li><span class="mk">✓</span> Network premium com quem tá no mesmo nível</li>
+        </ul>
+        <a href="https://pay.cakto.com.br/bo5ke79_967879" class="btn solid">Entrar no Discord</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Antigravidade Club · Sem coach, sem guru, sem hype 🚀</footer>
+
+</body>
+</html>
